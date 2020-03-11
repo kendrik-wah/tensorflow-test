@@ -107,6 +107,12 @@ NOTE: The following procedure details the algorithms learned in both:
         
         - Classification
 
+    b) Are we somehow trying to optimize something?
+
+        - Function Approximation
+
+        - Locating Global Minima
+
 '''
 
 #####################
@@ -197,4 +203,9 @@ def lin_reg_scratch_eg():
             epochs_plot.append(i+1)
             loss_plot.append(loss)
 
-            print( 'Loss is {}'.format( loss ) ) 
+    output = hypothesized_values(X_test, weights, bias)
+    labels = Y_test
+    accuracy = tf.metrics.MeanAbsoluteError()
+    accuracy.update_state(labels, output)
+    print('Mean Absolute Error = {}'.format(accuracy.result().numpy()))
+    print('Accuracy = {}'.format(1-accuracy.result().numpy()))
